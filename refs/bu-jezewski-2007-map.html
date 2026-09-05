@@ -1,0 +1,337 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans+KR:wght@400;500;600&family=Noto+Serif+KR:wght@600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap">
+<title>Bu–Jezewski 옹호 이론 지도</title>
+<style>
+  :root{
+    --bg:#F4F6F7; --surface:#FFFFFF; --surface-2:#FBFCFC;
+    --ink:#14181E; --ink-2:#4C5560; --ink-3:#6E7884;
+    --rule:#DBE0E5; --rule-2:#EAEEF1;
+    --macro:#22557F; --macro-soft:#EAF1F7;
+    --micro:#86325B; --micro-soft:#F8EDF2;
+    --flag:#8A5D06; --flag-soft:#FBF3E2;
+    --serif:"Source Serif 4","Noto Serif KR",Georgia,serif;
+    --sans:"IBM Plex Sans KR","Helvetica Neue",Arial,sans-serif;
+    --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root:not([data-theme="light"]){
+      --bg:#0E1116; --surface:#161A20; --surface-2:#1B2028;
+      --ink:#E7EBF0; --ink-2:#A2ACB8; --ink-3:#7C8794;
+      --rule:#262C35; --rule-2:#1F252D;
+      --macro:#8CBCE6; --macro-soft:#16242F;
+      --micro:#E2A0BE; --micro-soft:#2A1A22;
+      --flag:#E3B45A; --flag-soft:#2C2213;
+    }
+  }
+  :root[data-theme="dark"]{
+    --bg:#0E1116; --surface:#161A20; --surface-2:#1B2028;
+    --ink:#E7EBF0; --ink-2:#A2ACB8; --ink-3:#7C8794;
+    --rule:#262C35; --rule-2:#1F252D;
+    --macro:#8CBCE6; --macro-soft:#16242F;
+    --micro:#E2A0BE; --micro-soft:#2A1A22;
+    --flag:#E3B45A; --flag-soft:#2C2213;
+  }
+
+  body{background:var(--bg);color:var(--ink);font-family:var(--sans);
+       line-height:1.65;-webkit-font-smoothing:antialiased;}
+  .wrap{max-width:1120px;margin:0 auto;padding:40px 24px 72px;
+        display:flex;flex-direction:column;gap:38px;}
+
+  /* ---- masthead ---- */
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.14em;
+           text-transform:uppercase;color:var(--ink-3);margin:0 0 10px;}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.4vw,42px);
+     line-height:1.2;letter-spacing:-.01em;margin:0;text-wrap:balance;}
+  .standfirst{font-size:15px;color:var(--ink-2);max-width:62ch;margin:14px 0 0;}
+  .cite-inline{font-family:var(--mono);font-size:11.5px;color:var(--ink-3);
+               margin:18px 0 0;padding-top:16px;border-top:1px solid var(--rule);
+               line-height:1.8;}
+  .cite-inline a{color:var(--ink-2);text-decoration-color:var(--rule);}
+  .cite-inline a:hover{color:var(--ink);}
+
+  /* ---- figure ---- */
+  figure{margin:0;}
+  .figwrap{overflow-x:auto;background:var(--surface);border:1px solid var(--rule);
+           border-radius:10px;padding:26px 24px 20px;}
+  .figwrap svg{display:block;min-width:820px;width:100%;height:auto;}
+  figcaption{margin-top:14px;font-size:13px;color:var(--ink-2);max-width:70ch;}
+  figcaption b{font-family:var(--serif);font-weight:600;color:var(--ink);}
+  .scrollhint{display:none;font-family:var(--mono);font-size:10.5px;
+              color:var(--ink-3);margin-bottom:10px;}
+  @media (max-width:880px){.scrollhint{display:block;}}
+
+  /* ---- legend ---- */
+  .legend{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:16px;
+          padding-top:16px;border-top:1px solid var(--rule-2);}
+  .lg{display:flex;align-items:center;gap:9px;font-size:12px;color:var(--ink-2);}
+  .sw{width:26px;height:14px;border-radius:3px;flex:none;}
+  .sw-macro{background:var(--macro-soft);border:1px solid var(--macro);}
+  .sw-micro{background:var(--micro-soft);border:1px solid var(--micro);}
+  .sw-flag{background:var(--flag-soft);border:1.5px dashed var(--flag);}
+  .sw-slot{background:var(--surface-2);border:1px solid var(--rule);}
+
+  /* ---- verification ---- */
+  h2{font-family:var(--serif);font-weight:600;font-size:21px;margin:0 0 4px;
+     letter-spacing:-.005em;}
+  .sub{font-size:13.5px;color:var(--ink-2);margin:0 0 20px;max-width:66ch;}
+  .cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:18px;}
+  .panel{background:var(--surface);border:1px solid var(--rule);
+         border-radius:10px;padding:20px 22px 22px;}
+  .panel.flagged{border-color:var(--flag);border-style:dashed;background:var(--flag-soft);}
+  .panel h3{font-size:12px;font-family:var(--mono);font-weight:500;
+            letter-spacing:.1em;text-transform:uppercase;margin:0 0 14px;
+            color:var(--ink-3);}
+  .panel.flagged h3{color:var(--flag);}
+  .panel ul{list-style:none;margin:0;padding:0;display:flex;
+            flex-direction:column;gap:11px;}
+  .panel li{font-size:13.5px;color:var(--ink-2);padding-left:20px;position:relative;}
+  .panel li::before{content:"";position:absolute;left:0;top:8px;width:9px;height:9px;
+                    border-radius:2px;background:var(--ink-3);}
+  .panel.flagged li::before{background:none;border:1.5px dashed var(--flag);
+                            width:8px;height:8px;top:7px;}
+  .panel li strong{color:var(--ink);font-weight:600;}
+  .panel li em{font-style:normal;font-family:var(--mono);font-size:11.5px;
+               color:var(--ink-3);display:block;margin-top:3px;}
+
+  /* ---- access ---- */
+  .routes{display:flex;flex-direction:column;gap:0;background:var(--surface);
+          border:1px solid var(--rule);border-radius:10px;overflow:hidden;}
+  .route{display:grid;grid-template-columns:34px 1fr auto;gap:14px;align-items:baseline;
+         padding:14px 20px;border-bottom:1px solid var(--rule-2);}
+  .route:last-child{border-bottom:none;}
+  .route .n{font-family:var(--mono);font-size:11px;color:var(--ink-3);
+            font-variant-numeric:tabular-nums;}
+  .route .nm{font-size:13.5px;color:var(--ink);}
+  .route .nm span{display:block;font-size:12px;color:var(--ink-3);margin-top:2px;}
+  .route a{font-family:var(--mono);font-size:11.5px;color:var(--macro);
+           text-decoration:none;border-bottom:1px solid var(--rule);white-space:nowrap;}
+  .route a:hover{border-bottom-color:var(--macro);}
+  .route.na .nm{color:var(--ink-3);}
+
+  footer{font-family:var(--mono);font-size:11px;color:var(--ink-3);
+         border-top:1px solid var(--rule);padding-top:18px;line-height:1.9;}
+  a:focus-visible,.route a:focus-visible{outline:2px solid var(--macro);
+         outline-offset:3px;border-radius:2px;}
+</style>
+
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Journal of Advanced Nursing · 2007 · 중범위이론</p>
+    <h1>대상자 옹호 이론 지도</h1>
+    <p class="standfirst">Bu와 Jezewski(2007)가 Walker &amp; Avant 개념분석으로 도출한
+      환자옹호 중범위이론을 <b>단계</b>(선행요인 → 핵심속성 → 결과)와
+      <b>수준</b>(거시 / 미시)의 두 축으로 재구성한 도식. 초록에서 직접 검증된 진술과
+      원문 본문 확인이 필요한 진술을 선으로 구분했다.</p>
+    <p class="cite-inline">
+      Bu, X., &amp; Jezewski, M. A. (2007). Developing a mid-range theory of patient
+      advocacy through concept analysis.<br>
+      <em>Journal of Advanced Nursing, 57</em>(1), 101–110. ·
+      <a href="https://doi.org/10.1111/j.1365-2648.2006.04096.x">doi:10.1111/j.1365-2648.2006.04096.x</a> ·
+      <a href="https://pubmed.ncbi.nlm.nih.gov/17184379/">PMID 17184379</a>
+    </p>
+  </header>
+
+  <figure>
+    <p class="scrollhint">← 좌우로 스크롤하여 전체 도식 보기</p>
+    <div class="figwrap">
+      <svg viewBox="0 0 1060 570" role="img"
+           aria-label="환자옹호 중범위이론 도식. 가로축은 선행요인, 핵심속성, 결과의 세 단계. 세로축은 거시사회적 수준과 미시사회적 수준. 거시 행에는 사회정의 옹호 속성이, 미시 행에는 자율성 보호와 대상자 편에서 행동 속성이 배치된다. 결과 열은 두 수준을 가로질러 배치되며 긍정적 영향과 부정적 영향으로 나뉜다. 점선 amber 표시는 원문 본문 확인이 필요한 항목이다.">
+        <defs>
+          <marker id="arw-macro" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" style="fill:var(--macro)"></path>
+          </marker>
+          <marker id="arw-micro" viewBox="0 0 10 10" refX="9" refY="5"
+                  markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+            <path d="M0,0 L10,5 L0,10 z" style="fill:var(--micro)"></path>
+          </marker>
+        </defs>
+
+        <!-- column headers -->
+        <text x="284" y="22" text-anchor="middle" font-size="15" font-weight="600" style="font-family:var(--serif);fill:var(--ink)">선행요인</text>
+        <text x="284" y="39" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">Antecedents</text>
+        <text x="612" y="22" text-anchor="middle" font-size="15" font-weight="600" style="font-family:var(--serif);fill:var(--ink)">핵심속성</text>
+        <text x="612" y="39" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">Attributes</text>
+        <text x="940" y="22" text-anchor="middle" font-size="15" font-weight="600" style="font-family:var(--serif);fill:var(--ink)">결과</text>
+        <text x="940" y="39" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">Consequences</text>
+        <line x1="8" y1="50" x2="1046" y2="50" stroke-width="1" style="stroke:var(--rule)"></line>
+
+        <!-- level bands -->
+        <rect x="8" y="62" width="746" height="192" rx="8" style="fill:var(--macro-soft)"></rect>
+        <rect x="8" y="272" width="746" height="212" rx="8" style="fill:var(--micro-soft)"></rect>
+        <line x1="158" y1="62" x2="158" y2="484" stroke-width="1" style="stroke:var(--rule)"></line>
+
+        <!-- row labels -->
+        <text x="24" y="146" font-size="14" font-weight="600" style="font-family:var(--serif);fill:var(--macro)">거시사회적 수준</text>
+        <text x="24" y="164" font-size="9.5" style="font-family:var(--mono);fill:var(--ink-3)">macro-social</text>
+        <text x="24" y="186" font-size="10.5" style="fill:var(--ink-3)">보건의료체계</text>
+
+        <text x="24" y="366" font-size="14" font-weight="600" style="font-family:var(--serif);fill:var(--micro)">미시사회적 수준</text>
+        <text x="24" y="384" font-size="9.5" style="font-family:var(--mono);fill:var(--ink-3)">micro-social</text>
+        <text x="24" y="406" font-size="10.5" style="fill:var(--ink-3)">개별 임상 상황</text>
+
+        <!-- ============ MACRO ROW ============ -->
+        <rect x="168" y="82" width="232" height="152" rx="6" stroke-width="1" style="fill:var(--surface);stroke:var(--macro)"></rect>
+        <text x="184" y="110" font-size="13" font-weight="600" style="fill:var(--macro)">거시사회적 요인</text>
+        <text x="184" y="134" font-size="11.5" style="fill:var(--ink-2)">보건의료체계 수준에서 발생하여</text>
+        <text x="184" y="152" font-size="11.5" style="fill:var(--ink-2)">간호사의 옹호 역할을 요구함</text>
+        <rect x="184" y="192" width="156" height="26" rx="13" stroke-width="1.4" stroke-dasharray="3 3" style="fill:var(--flag-soft);stroke:var(--flag)"></rect>
+        <text x="262" y="209" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--flag)">세부 항목  p. ____</text>
+
+        <rect x="486" y="82" width="252" height="152" rx="6" stroke-width="1" style="fill:var(--surface);stroke:var(--macro)"></rect>
+        <text x="502" y="110" font-size="13" font-weight="600" style="fill:var(--macro)">③ 사회정의 옹호</text>
+        <text x="502" y="132" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">championing social justice in</text>
+        <text x="502" y="147" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">the provision of health care</text>
+        <rect x="502" y="192" width="156" height="26" rx="13" stroke-width="1.4" stroke-dasharray="3 3" style="fill:var(--flag-soft);stroke:var(--flag)"></rect>
+        <text x="580" y="209" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--flag)">수준 대응  p. ____</text>
+
+        <!-- ============ MICRO ROW ============ -->
+        <rect x="168" y="292" width="232" height="172" rx="6" stroke-width="1" style="fill:var(--surface);stroke:var(--micro)"></rect>
+        <text x="184" y="320" font-size="13" font-weight="600" style="fill:var(--micro)">미시사회적 요인</text>
+        <text x="184" y="344" font-size="11.5" style="fill:var(--ink-2)">개별 환자의 임상 상황에서</text>
+        <text x="184" y="362" font-size="11.5" style="fill:var(--ink-2)">발생하여 옹호를 요구함</text>
+        <rect x="184" y="418" width="156" height="26" rx="13" stroke-width="1.4" stroke-dasharray="3 3" style="fill:var(--flag-soft);stroke:var(--flag)"></rect>
+        <text x="262" y="435" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--flag)">세부 항목  p. ____</text>
+
+        <rect x="486" y="292" width="252" height="172" rx="6" stroke-width="1" style="fill:var(--surface);stroke:var(--micro)"></rect>
+        <text x="502" y="318" font-size="13" font-weight="600" style="fill:var(--micro)">① 자율성 보호</text>
+        <text x="502" y="336" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">safeguarding patients' autonomy</text>
+        <text x="502" y="368" font-size="13" font-weight="600" style="fill:var(--micro)">② 대상자 편에서 행동</text>
+        <text x="502" y="386" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">acting on behalf of patients</text>
+        <rect x="502" y="418" width="156" height="26" rx="13" stroke-width="1.4" stroke-dasharray="3 3" style="fill:var(--flag-soft);stroke:var(--flag)"></rect>
+        <text x="580" y="435" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--flag)">수준 대응  p. ____</text>
+
+        <!-- ============ CONSEQUENCES (spans both levels) ============ -->
+        <rect x="834" y="62" width="212" height="422" rx="8" stroke-width="1" style="fill:var(--surface);stroke:var(--rule)"></rect>
+        <text x="852" y="96" font-size="13" font-weight="600" style="fill:var(--ink)">맥락 의존적</text>
+        <text x="852" y="113" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">contextual</text>
+        <line x1="852" y1="134" x2="1028" y2="134" stroke-width="1" style="stroke:var(--rule)"></line>
+
+        <text x="852" y="168" font-size="12.5" font-weight="600" style="fill:var(--ink)">＋  긍정적 영향</text>
+        <text x="852" y="194" font-size="11.5" style="fill:var(--ink-2)">환자</text>
+        <text x="852" y="214" font-size="11.5" style="fill:var(--ink-2)">동료 간호사</text>
+        <text x="852" y="234" font-size="11.5" style="fill:var(--ink-2)">간호전문직</text>
+
+        <line x1="852" y1="266" x2="1028" y2="266" stroke-width="1" stroke-dasharray="2 4" style="stroke:var(--rule)"></line>
+
+        <text x="852" y="300" font-size="12.5" font-weight="600" style="fill:var(--ink)">－  부정적 영향</text>
+        <text x="852" y="326" font-size="11.5" style="fill:var(--ink-2)">옹호 행동을 수행한</text>
+        <text x="852" y="346" font-size="11.5" style="fill:var(--ink-2)">간호사 자신</text>
+
+        <rect x="852" y="430" width="128" height="26" rx="13" stroke-width="1" style="fill:var(--surface-2);stroke:var(--rule)"></rect>
+        <text x="916" y="447" text-anchor="middle" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">p. ____</text>
+
+        <!-- ============ ARROWS ============ -->
+        <text x="443" y="146" text-anchor="middle" font-size="10" style="fill:var(--ink-3)">옹호를 요구</text>
+        <line x1="406" y1="158" x2="478" y2="158" stroke-width="1.4" marker-end="url(#arw-macro)" style="stroke:var(--macro)"></line>
+        <text x="443" y="366" text-anchor="middle" font-size="10" style="fill:var(--ink-3)">옹호를 요구</text>
+        <line x1="406" y1="378" x2="478" y2="378" stroke-width="1.4" marker-end="url(#arw-micro)" style="stroke:var(--micro)"></line>
+
+        <text x="786" y="146" text-anchor="middle" font-size="10" style="fill:var(--ink-3)">옹호 행동</text>
+        <line x1="744" y1="158" x2="826" y2="158" stroke-width="1.4" marker-end="url(#arw-macro)" style="stroke:var(--macro)"></line>
+        <text x="786" y="366" text-anchor="middle" font-size="10" style="fill:var(--ink-3)">옹호 행동</text>
+        <line x1="744" y1="378" x2="826" y2="378" stroke-width="1.4" marker-end="url(#arw-micro)" style="stroke:var(--micro)"></line>
+
+        <!-- footnote inside plate -->
+        <text x="8" y="516" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">개념분석 방법: Walker &amp; Avant · 분석 대상: 영문 옹호 문헌 1974–2006</text>
+        <text x="8" y="536" font-size="10" style="font-family:var(--mono);fill:var(--ink-3)">결과 열이 두 수준을 가로지르는 이유: 초록에서 결과는 수준이 아니라 영향의 방향으로 구분됨</text>
+      </svg>
+    </div>
+
+    <div class="legend">
+      <div class="lg"><span class="sw sw-macro"></span>거시사회적 수준 (macro-social)</div>
+      <div class="lg"><span class="sw sw-micro"></span>미시사회적 수준 (micro-social)</div>
+      <div class="lg"><span class="sw sw-flag"></span>원문 본문 확인 필요 — 초록에 없음</div>
+      <div class="lg"><span class="sw sw-slot"></span>초록 검증 완료 — 페이지만 확정</div>
+    </div>
+
+    <figcaption><b>도식 1.</b> 이 이론의 두 축은 서로 직교한다. 개념분석의 <b>단계</b>는 가로로,
+      옹호가 일어나는 <b>사회적 수준</b>은 세로로 흐른다. 선행요인과 핵심속성은 두 수준으로 나뉘지만
+      결과는 그렇지 않다 — 초록은 결과를 “맥락 의존적”이라 하며 간호사에게 미치는 부정적 영향까지
+      포함시키므로, 결과 열은 두 수준을 가로질러 그렸다.</figcaption>
+  </figure>
+
+  <section>
+    <h2>인용 전 검증 상태</h2>
+    <p class="sub">PubMed 초록으로 근거가 확보되는 진술과, 원문 본문(이론 모형 그림 포함)을
+      확인해야 하는 진술을 분리했다. 오른쪽 항목은 심사에서 근거를 요구받기 쉬운 지점이다.</p>
+    <div class="cols">
+
+      <div class="panel">
+        <h3>초록에서 검증 완료</h3>
+        <ul>
+          <li><strong>개념분석 방법론</strong>
+            <em>Walker &amp; Avant 방법 · 영문 문헌 1974–2006 종합</em></li>
+          <li><strong>핵심속성 3가지</strong>
+            <em>safeguarding autonomy · acting on behalf · championing social justice</em></li>
+          <li><strong>거시·미시 두 수준의 존재</strong>
+            <em>“reflect nurses' advocacy roles at both macro- and micro-social levels”</em></li>
+          <li><strong>선행요인이 두 수준에서 발생</strong>
+            <em>“Antecedents … occur at both macro- and micro-social levels”</em></li>
+          <li><strong>결과의 맥락 의존성과 양면성</strong>
+            <em>“Consequences … are contextual” · 간호사에 대한 부정적 결과 포함</em></li>
+        </ul>
+      </div>
+
+      <div class="panel flagged">
+        <h3>원문 본문 확인 필요</h3>
+        <ul>
+          <li><strong>속성–수준 1:1 대응</strong>
+            자율성 보호·대상자 편에서 행동 = 미시 / 사회정의 옹호 = 거시.
+            초록은 “양쪽 수준을 반영한다”고만 서술하며 대응을 밝히지 않는다.
+            <em>본문 이론 모형(Figure) 확인 후 p. ___ 기입</em></li>
+          <li><strong>거시사회적 선행요인의 세부 항목</strong>
+            <em>p. ___ 기입</em></li>
+          <li><strong>미시사회적 선행요인의 세부 항목</strong>
+            <em>p. ___ 기입</em></li>
+          <li><strong>이론 모형 그림의 번호와 위치</strong>
+            <em>Figure ___, p. ___</em></li>
+        </ul>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <h2>원문 확보 경로</h2>
+    <p class="sub">PMC 무료 전문은 없다 — Wiley 유료 저널이며 PubMed Central에 등재되지 않았다.</p>
+    <div class="routes">
+      <div class="route">
+        <span class="n">01</span>
+        <span class="nm">Wiley Online Library<span>SNU 도서관 경유 · JAN 구독 중 · 가장 빠름</span></span>
+        <a href="https://onlinelibrary.wiley.com/doi/abs/10.1111/j.1365-2648.2006.04096.x">onlinelibrary.wiley.com ↗</a>
+      </div>
+      <div class="route">
+        <span class="n">02</span>
+        <span class="nm">PubMed 레코드<span>초록 · MeSH 용어 확인용</span></span>
+        <a href="https://pubmed.ncbi.nlm.nih.gov/17184379/">pubmed.ncbi.nlm.nih.gov ↗</a>
+      </div>
+      <div class="route">
+        <span class="n">03</span>
+        <span class="nm">Semantic Scholar<span>PDF 링크가 걸려 있을 때가 있음</span></span>
+        <a href="https://www.semanticscholar.org/paper/Developing-a-mid-range-theory-of-patient-advocacy-Bu-Jezewski/0b81fb4d8bc3d201063524645328d3408f0531f6">semanticscholar.org ↗</a>
+      </div>
+      <div class="route">
+        <span class="n">04</span>
+        <span class="nm">ResearchGate<span>저자 업로드본 존재 가능</span></span>
+        <a href="https://www.researchgate.net/publication/6616829_Developing_a_mid-range_theory_of_patient_advocacy_through_concept_analysis">researchgate.net ↗</a>
+      </div>
+      <div class="route na">
+        <span class="n">—</span>
+        <span class="nm">PubMed Central<span>무료 전문 없음 (미등재)</span></span>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC10415994/">대체: 관련 OA 논문 ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    초록 원문 및 서지정보 출처: PubMed (PMID 17184379).
+    원문 DOI: <a href="https://doi.org/10.1111/j.1365-2648.2006.04096.x" style="color:var(--ink-2)">10.1111/j.1365-2648.2006.04096.x</a><br>
+    도식의 단계×수준 재구성 및 검증 상태 표시는 초록 진술 범위 안에서 작성되었으며,
+    점선 표시 항목은 원문 본문 대조 전까지 인용 근거로 사용하지 않는다.<br>
+    저장소 파일: refs/bu-jezewski-2007.md · refs/bu-jezewski-2007-map.html
+  </footer>
+
+</div>
